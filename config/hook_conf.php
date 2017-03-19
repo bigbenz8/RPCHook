@@ -34,4 +34,17 @@ return array(
 
     //重发集合表的名称 (服务开始后就不能更改了)
     'resend_set'        => 'resend' ,
+
+    //慢响应记录
+    'slow_log'      => 1,
+    //响应超过这个值 将被记录到日志 单位(微秒)
+    'slow_log_tm'   => 500000,
+    //慢响应记录的周期 m(按月生成), d(按天生在). 日志放在 sortedSet中 命名类似 slow_log_q_2017-02-11 ,或 slow_log_q_2017-02
+    'slow_log_cron' => 'm',
+
+    //是否记录所有的请求
+    'log_req'       => 0,
+    //日志放在 sortedSet中 命名类似 slow_log_q_2017-02-11 ,或 slow_log_q_2017-02
+    'log_req_cron'  => 'd',
+
 ) ;

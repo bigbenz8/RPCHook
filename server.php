@@ -7,7 +7,7 @@
  * 在第一次请求失败后,RPCHook会根据hoook_conf.php的设置做重复发送,最后一次扔不成功的 记录到发送失败的有序集合中
  *
  * RPCHook只接收请求过来的如下格式的数据包:
- * $_POST = array('url'=>xx, 'post_data'=>xx) ;
+ * $_POST = array('url'=>xx, 'type'=>'async', 'post_data'=>xx) ;
  *
  * User: zkf
  * Date: 17-3-12
@@ -30,7 +30,7 @@ require_once $root_dir.'/common/SSDB.php' ;
 //常用函数库
 require_once $root_dir.'/common/func.php' ;
 
-//载入服务配置文件
+//载入服务配置文件e
 $serv_conf_file = $root_dir.'/config/server_conf.php' ;
 if(file_exists($serv_conf_file) ) {
     $serv_conf = require_once ($serv_conf_file );
@@ -56,6 +56,7 @@ $http -> on('request', function($request, $response){
 
     //请求过来的post值
     $req_post = $request -> post ;
+    $GLOBALS['req_post'] = $req_post ;
 
     switch ($req_uri) {
         case $serv_conf['server_addr'] :
